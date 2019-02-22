@@ -4,7 +4,7 @@
 //
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "jgarcia_argtok.h"
 int execBackground(char **args)
 {
     int i;
@@ -25,8 +25,7 @@ int execBackground(char **args)
         return 0;
     }
 }
-
 int executeCmd(char **args)
 {
-
+    print_tokens(args);
 }
