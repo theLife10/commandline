@@ -51,6 +51,8 @@ int executeCmd(char **args)
   //execlp("cat",args[0],args[1],NULL);
     //execlp("ls",args[0],args[1],NULL);
 
+
+    //when I put the fork() and exec it finally runs normal
       pid_t pid;
           pid = fork();
           if(pid < 0){
