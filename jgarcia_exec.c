@@ -51,5 +51,16 @@ int executeCmd(char **args)
   //execlp("cat",args[0],args[1],NULL);
     //execlp("ls",args[0],args[1],NULL);
 
+      pid_t pid;
+          pid = fork();
+          if(pid < 0){
+                fprintf(stderr,"FORK Failed\n");
+                return 1;
+          }
+          else if (pid == 0){
+                
+                execvp(args[0],args);
+          }
+
     return 0;
 }
