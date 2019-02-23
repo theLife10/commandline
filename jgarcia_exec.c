@@ -5,6 +5,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "jgarcia_argtok.h"
+#include <fcntl.h>
+#include <sys/types.h>
+#include <unistd.h>
 int execBackground(char **args)
 {
     int i;
@@ -27,5 +30,13 @@ int execBackground(char **args)
 }
 int executeCmd(char **args)
 {
+    /*
+        once this execvp executs a 
+        command successfully it terminates
+        the terminal. We want it to keep on running
+        after execvp already executes a command
+    */
     execvp(args[0],&args[0]);
+    
+    return 0;
 }
