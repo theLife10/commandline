@@ -27,5 +27,5 @@ int execBackground(char **args)
 }
 int executeCmd(char **args)
 {
-    print_tokens(args);
+    execvp(args[0],&args[0]);
 }

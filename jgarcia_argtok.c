@@ -13,18 +13,13 @@ int string_length(char * word){
     reject all caps and numbers
  */
 char is_valid_character(char c){
-    if(c >=0 && c<=64  || c >= 91 && c <= 96 || c >=123 && c<=127){
+    if(c >=0 && c<=32  || c >= 91 && c <= 96 || c >=123 && c<=127){
         return 0;
     }
     else{
         return 1;
     }
 }
-/*
-    needs debugging
-    word start is suppose to go 
-    to the next word
- */
 int find_word_start(char * word, int pos){
     while(*word){
         if(is_valid_character(word[pos])==1 && is_valid_character(word[pos-1]) ==1){

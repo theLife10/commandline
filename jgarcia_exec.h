@@ -1,6 +1,6 @@
 //
 //	EE 4374 Assignment # 2 Command Executer
-//	Author: ???
+//	Author: Jesus Garcia
 //
 
 int executeCmd(char **args);
