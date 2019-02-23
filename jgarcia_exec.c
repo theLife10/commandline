@@ -8,6 +8,7 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <string.h>
 int execBackground(char **args)
 {
     int i;
@@ -35,8 +36,20 @@ int executeCmd(char **args)
         command successfully it terminates
         the terminal. We want it to keep on running
         after execvp already executes a command
+        this only works with one command line only like
+        ls, date, pwd
     */
-    execvp(args[0],&args[0]);
     
+ //   execvp(args[0],&(args[0]));
+    /*
+        this works for:
+        ls -l
+        ls -a
+    */
+  //  execl("/bin/ls", args[0], args[1], NULL);
+  //execl("/bin/mkdir",args[0],args[1],NULL);
+  //execl("/bin/cat",args[0],args[1],NULL);
+   // execlp("wc",args[0],args[1],NULL);
+
     return 0;
 }
