@@ -46,10 +46,10 @@ int executeCmd(char **args)
         ls -l
         ls -a
     */
-  //  execl("/bin/ls", args[0], args[1], NULL);
-  //execl("/bin/mkdir",args[0],args[1],NULL);
-  //execl("/bin/cat",args[0],args[1],NULL);
-   // execlp("wc",args[0],args[1],NULL);
+  //  execlp("wc", args[0], args[1], NULL);
+  //execlp("mkdir",args[0],args[1],NULL);
+  //execlp("cat",args[0],args[1],NULL);
+    //execlp("ls",args[0],args[1],NULL);
 
     return 0;
 }
