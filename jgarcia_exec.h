@@ -4,4 +4,4 @@
 //
 
 int executeCmd(char **args);
-void listdirectory(char **args);
+int execBackground(char **args);

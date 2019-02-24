@@ -9,6 +9,9 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+
 int execBackground(char **args)
 {
     int i;
@@ -22,6 +25,7 @@ int execBackground(char **args)
     {
         free(args[i - 1]);
         args[i - 1] = NULL; // remove the ampersand
+
         return 1;
     }
     else
@@ -38,8 +42,12 @@ int executeCmd(char **args)
     {
         return -1;
     }
+    else if( pid != 0 ){
+        wait(NULL);
+    }
     else if (pid == 0)
     {
+
         //execl("/bin/ls", args[0], args[1], NULL);
         if (strcmp(args[0], "ls") == 0)
         {
@@ -49,7 +57,7 @@ int executeCmd(char **args)
         {
             execl("/bin/ls", args[0], args[1], NULL);
         }
-        else if (strcmp(args[0], "ls") == 0 && strcmp(args[1], "-a"))
+        else if (strcmp(args[0], "ls") == 0 && strcmp(args[1], "-a") == 0)
         {
             execl("/bin/ls", args[0], args[1], NULL);
         }
