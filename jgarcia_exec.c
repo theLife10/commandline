@@ -32,12 +32,6 @@ int execBackground(char **args)
 int executeCmd(char **args)
 {
 
-    //   execvp(args[0],&(args[0]));
-    //  execlp("wc", args[0], args[1], NULL);
-    //execlp("mkdir",args[0],args[1],NULL);
-    //execlp("cat",args[0],args[1],NULL);
-    //execlp("ls",args[0],args[1],NULL);
-
     //when I put the fork() and exec it finally runs normal
     pid_t pid = fork();
     if (pid < 0)
