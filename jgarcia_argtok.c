@@ -1,6 +1,6 @@
 //
 //	EE 4374 Assignment # 1 Argument Tokenizer
-//	Author: Sergio Galindo
+//	Author: 
 //
 #include <stdio.h>
 #include <stdlib.h>
