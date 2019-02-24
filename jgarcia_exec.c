@@ -46,7 +46,39 @@ int executeCmd(char **args)
     }
     else if (pid == 0)
     {
-        execl("/bin/ls", args[0], args[1], NULL);
+        //execl("/bin/ls", args[0], args[1], NULL);
+        if (strcmp(args[0], "ls") == 0)
+        {
+            execvp(args[0], args);
+        }
+        else if (strcmp(args[0], "ls") == 0 && strcmp(args[1], "-l") == 0)
+        {
+            execl("/bin/ls", args[0], args[1], NULL);
+        }
+        else if (strcmp(args[0], "ls") == 0 && strcmp(args[1], "-a"))
+        {
+            execl("/bin/ls", args[0], args[1], NULL);
+        }
+        else if (strcmp(args[0], "pwd") == 0)
+        {
+            execvp(args[0], args);
+        }
+        else if (strcmp(args[0], "wc") == 0)
+        {
+            execlp("wc", args[0], args[1], NULL);
+        }
+        else if (strcmp(args[0], "cat") == 0)
+        {
+            execl("/bin/cat", args[0], args[1], NULL);
+        }
+        else if (strcmp(args[0], "mkdir") == 0)
+        {
+            execl("/bin/mkdir", args[0], args[1], NULL);
+        }
+        else
+        {
+            return 0;
+        }
     }
 
     return 0;
