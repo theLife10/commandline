@@ -32,7 +32,12 @@ int execBackground(char **args)
         }
         else if (pid == 0)
         {
-            execvp(args[0], args);
+            //execvp(args[0], args);
+            //           execvp(args[0], args); /* execute the command  */
+            if (execvp(args[0], args) < 0)
+            {
+                printf("ERROR: Invalid command\n");
+            }
         }
         else
         {
@@ -53,8 +58,6 @@ int executeCmd(char **args)
     //this method executes in background i think
     execBackground(args);
 
-  execBackground(args);
-
     if (pid < 0)
     {
         return -1;
@@ -62,6 +65,10 @@ int executeCmd(char **args)
     else if (pid == 0)
     {
         execvp(args[0], args);
+    }
+    else
+    {
+        wait(NULL);
     }
 
     return 0;
