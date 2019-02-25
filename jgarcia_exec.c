@@ -26,6 +26,21 @@ int execBackground(char **args)
         free(args[i - 1]);
         args[i - 1] = NULL; // remove the ampersand
 
+        pid_t pid;
+        pid = fork();
+        if (pid < 0)
+        {
+            return 1;
+        }
+        else if (pid == 0)
+        {
+            execvp(args[0], args);
+        }
+        else
+        {
+            wait(NULL);
+        }
+
         return 1;
     }
     else
@@ -35,52 +50,16 @@ int execBackground(char **args)
 }
 int executeCmd(char **args)
 {
-
     //when I put the fork() and exec it finally runs normal
     pid_t pid = fork();
     if (pid < 0)
     {
         return -1;
     }
-    else if( pid != 0 ){
-        wait(NULL);
-    }
     else if (pid == 0)
     {
-
-        //execl("/bin/ls", args[0], args[1], NULL);
-        if (strcmp(args[0], "ls") == 0)
-        {
-            execvp(args[0], args);
-        }
-        else if (strcmp(args[0], "ls") == 0 && strcmp(args[1], "-l") == 0)
-        {
-            execl("/bin/ls", args[0], args[1], NULL);
-        }
-        else if (strcmp(args[0], "ls") == 0 && strcmp(args[1], "-a") == 0)
-        {
-            execl("/bin/ls", args[0], args[1], NULL);
-        }
-        else if (strcmp(args[0], "pwd") == 0)
-        {
-            execvp(args[0], args);
-        }
-        else if (strcmp(args[0], "wc") == 0)
-        {
-            execlp("wc", args[0], args[1], NULL);
-        }
-        else if (strcmp(args[0], "cat") == 0)
-        {
-            execl("/bin/cat", args[0], args[1], NULL);
-        }
-        else if (strcmp(args[0], "mkdir") == 0)
-        {
-            execl("/bin/mkdir", args[0], args[1], NULL);
-        }
-        else
-        {
-            return 0;
-        }
+        execvp(args[0], args);
+        execBackground(args);
     }
 
     return 0;

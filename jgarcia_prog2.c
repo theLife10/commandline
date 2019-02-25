@@ -38,6 +38,7 @@ int main()
 
 		// make the argument vector
 		args = argtok(buff);
+
 		// execute the command
 		executeCmd(args);
 	}
