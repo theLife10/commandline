@@ -8,8 +8,6 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <unistd.h>
-#include <string.h>
-#include <sys/types.h>
 #include <sys/wait.h>
 
 int execBackground(char **args)
@@ -52,6 +50,11 @@ int executeCmd(char **args)
 {
     //when I put the fork() and exec it finally runs normal
     pid_t pid = fork();
+    //this method executes in background i think
+    execBackground(args);
+
+  execBackground(args);
+
     if (pid < 0)
     {
         return -1;
@@ -59,7 +62,6 @@ int executeCmd(char **args)
     else if (pid == 0)
     {
         execvp(args[0], args);
-        execBackground(args);
     }
 
     return 0;
