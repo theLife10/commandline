@@ -26,6 +26,7 @@ int execBackground(char **args)
 
         pid_t pid;
         pid = fork();
+        printf("the child\n");
         if (pid < 0)
         {
             return 1;
@@ -36,7 +37,6 @@ int execBackground(char **args)
             //           execvp(args[0], args); /* execute the command  */
             if (execvp(args[0], args) < 0)
             {
-                printf("ERROR: Invalid command\n");
             }
         }
         else
@@ -53,10 +53,12 @@ int execBackground(char **args)
 }
 int executeCmd(char **args)
 {
+    execBackground(args);
+
     //when I put the fork() and exec it finally runs normal
     pid_t pid = fork();
+    printf("the parent\n");
     //this method executes in background i think
-    execBackground(args);
 
     if (pid < 0)
     {
@@ -65,10 +67,6 @@ int executeCmd(char **args)
     else if (pid == 0)
     {
         execvp(args[0], args);
-    }
-    else
-    {
-        wait(NULL);
     }
 
     return 0;
