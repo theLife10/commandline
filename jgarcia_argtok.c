@@ -7,14 +7,6 @@
 #include <stdlib.h>
 #include "jgarcia_argtok.h"
 
-char is_valid_character(char c)
-{
-  if (c == '\t' || c == '\n' || c == '\v')
-    return 0;
-  else
-    return 1;
-}
-
 int find_word_start(char *word, int pos)
 {
   int out = 0;
