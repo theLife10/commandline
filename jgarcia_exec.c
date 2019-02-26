@@ -10,6 +10,8 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
+void checkforbackground(char **args);
+
 int execBackground(char **args)
 {
     int i;
@@ -24,22 +26,6 @@ int execBackground(char **args)
         free(args[i - 1]);
         args[i - 1] = NULL; // remove the ampersand
 
-        pid_t pid;
-        pid = fork();
-        printf("the child\n");
-        if (pid < 0)
-        {
-            return 1;
-        }
-        else if (pid == 0)
-        {
-            execvp(args[0], args) ;
-        }
-        else
-        {
-            wait(NULL);
-        }
-
         return 1;
     }
     else
@@ -49,24 +35,42 @@ int execBackground(char **args)
 }
 int executeCmd(char **args)
 {
-    execBackground(args);
+    if (execBackground(args) == 1)
+    {
+        checkforbackground(args);
+    }
+    else
+    {
+        pid_t pid;
+        pid = fork();
 
-    //when I put the fork() and exec it finally runs normal
-    pid_t pid = fork();
-    printf("the parent\n");
+        if (pid < 0)
+        {
+            return -1;
+        }
+        else if (pid == 0)
+        {
+            execvp(args[0], args);
+        }
+        else
+        {
+            wait(NULL);
+        }
+    }
+    return 0;
+}
+void checkforbackground(char **args)
+{
 
+    pid_t pid;
+    pid = fork();
     if (pid < 0)
     {
-        return -1;
+        fprintf(stderr, "wrong");
     }
     else if (pid == 0)
     {
+        printf("\n");
         execvp(args[0], args);
-
     }
-    else{
-        wait(NULL);
-    }
-
-    return 0;
 }

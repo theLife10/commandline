@@ -5,3 +5,4 @@
 
 int executeCmd(char **args);
 int execBackground(char **args);
+void checkforbackground(char ** args);
