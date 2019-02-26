@@ -33,11 +33,7 @@ int execBackground(char **args)
         }
         else if (pid == 0)
         {
-            //execvp(args[0], args);
-            //           execvp(args[0], args); /* execute the command  */
-            if (execvp(args[0], args) < 0)
-            {
-            }
+            execvp(args[0], args) ;
         }
         else
         {
@@ -58,7 +54,6 @@ int executeCmd(char **args)
     //when I put the fork() and exec it finally runs normal
     pid_t pid = fork();
     printf("the parent\n");
-    //this method executes in background i think
 
     if (pid < 0)
     {
@@ -67,6 +62,10 @@ int executeCmd(char **args)
     else if (pid == 0)
     {
         execvp(args[0], args);
+
+    }
+    else{
+        wait(NULL);
     }
 
     return 0;
