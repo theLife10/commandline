@@ -54,7 +54,7 @@ int executeCmd(char **args)
         }
         else
         {
-            wait(NULL);
+            waitpid(pid,NULL,0);
         }
     }
     return 0;

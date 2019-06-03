@@ -1,5 +1,5 @@
 //
-//	EE 4374 Assignment # 1 Argument Tokenizer
+//	EE 4374 Assignment # 1 
 //	Author:  Jesus Garcia
 //
 
@@ -108,7 +108,9 @@ void print_tokens(char **word)
     i++;
   }
 }
-
+//in
+//out
+//why
 char **argtok(char *word)
 {
   char **tokens = NULL;
