@@ -10,6 +10,7 @@
 #include <unistd.h>
 #include "jgarcia_argtok.h"
 #include "jgarcia_exec.h"
+#include "history.h"
 
 int main()
 {
@@ -17,6 +18,9 @@ int main()
 	int inputSize;
 	char buff[128]; // Character buffer
 	char **args;
+	char *historyargs;
+	List *history;
+	history = init_history();
 
 	write(1, "Welcome to the Student Shell (type 'x' to exit)\n", 48);
 	while (1)
@@ -27,6 +31,7 @@ int main()
 		inputSize = read(0, buff, 128);
 		// Strip off carriage return
 		buff[inputSize - 1] = '\0';
+		int bufferposition = 0;
 
 		if (buff[0] == '\0')
 			continue;
@@ -36,8 +41,18 @@ int main()
 			exit(0);
 		}
 
+		if ((buff[0] == '!'))
+		{
+			//	bufferposition = buff[1] - '0';
+			historyargs = get_history(history, bufferposition);
+			printf("%s", historyargs);
+			//executeCmd(historyargs);
+		}
+
 		// make the argument vector
 		args = argtok(buff);
+
+		add_history(history, *args);
 
 		// execute the command
 		executeCmd(args);
