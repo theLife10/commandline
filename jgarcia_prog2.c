@@ -40,12 +40,11 @@ int main()
 		{
 			exit(0);
 		}
-
+        //currently working on this
 		if ((buff[0] == '!'))
 		{
 			//	bufferposition = buff[1] - '0';
 			historyargs = get_history(history, bufferposition);
-			printf("%s", historyargs);
 			//executeCmd(historyargs);
 		}
 
